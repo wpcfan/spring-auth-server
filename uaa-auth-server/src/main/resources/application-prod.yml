@@ -1,0 +1,66 @@
+logging:
+  level:
+    com:
+      imooc: ERROR
+    org:
+      hibernate: ERROR
+      springframework:
+        aop: ERROR
+        data: ERROR
+        jdbc: ERROR
+        security: ERROR
+    web: ERROR
+spring:
+  datasource:
+    hikari:
+      auto-commit: false
+      data-source-properties:
+        cachePrepStmts: true
+        prepStmtCacheSize: 250
+        prepStmtCacheSqlLimit: 2048
+        useServerPrepStmts: true
+      pool-name: Hikari
+    ## 数据库密码
+    password: password
+    type: com.zaxxer.hikari.HikariDataSource
+    ## 数据库连接 URL，为了兼容 MySQL，添加 ;MODE=MySQL
+    ## ;DATABASE_TO_LOWER=TRUE 是让表名转为小写
+    ## ;CASE_INSENSITIVE_IDENTIFIERS=TRUE 不区分大小写
+    ## ;DB_CLOSE_DELAY=-1 不自动关闭数据库连接
+    url: jdbc:mysql://localhost:3306/security?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC
+    ## 数据库用户名
+    username: user
+  devtools:
+    add-properties: false
+    livereload:
+      enabled: false
+    restart:
+      enabled: false
+  h2:
+    console:
+      enabled: false
+  jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        cache:
+          use_second_level_cache: false
+        connection:
+          provider_disables_autocommit: true
+        generate_statistics: false
+        id:
+          new_generator_mappings: true
+        jdbc:
+          batch_size: 25
+        order_inserts: true
+        order_updates: true
+        query:
+          fail_on_pagination_over_collection_fetch: true
+          in_clause_parameter_padding: true
+    show-sql: true
+  sql:
+    init:
+      platform: mysql

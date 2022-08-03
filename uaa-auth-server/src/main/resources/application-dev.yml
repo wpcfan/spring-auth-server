@@ -1,0 +1,57 @@
+logging:
+  level:
+    com:
+      imooc:
+        uaa: DEBUG
+    org:
+      hibernate: DEBUG
+      springframework:
+        boot:
+          autoconfigure: DEBUG
+        aop: DEBUG
+        data: DEBUG
+        jdbc: DEBUG
+        security:
+          authentication: DEBUG
+          authorization: DEBUG
+          oauth2: DEBUG
+          web: TRACE
+    redis:
+      embedded: DEBUG
+    web: DEBUG
+  pattern:
+    console:
+      "%clr(%d{E HH:mm:ss.SSS}){blue} %clr(%-5p) %clr(${PID}){faint} %clr(---){faint}
+      %clr([%8.15t]){cyan} %clr(%-40.40logger{0}){blue} %clr(:){red} %clr(%m){faint}%n"
+spring:
+  devtools:
+    livereload:
+      enabled: true
+    restart:
+      enabled: true
+  datasource:
+    driver-class-name: org.h2.Driver
+    password: ""
+    url: jdbc:h2:mem:test;MODE=MySQL;DATABASE_TO_LOWER=TRUE;CASE_INSENSITIVE_IDENTIFIERS=TRUE;DB_CLOSE_DELAY=-1
+    username: sa
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+      settings:
+        trace: false
+        web-allow-others: false
+  jpa:
+    database: h2
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        cache:
+          use_second_level_cache: false
+  sql:
+    init:
+      mode: embedded
+      data-locations: "classpath:data-h2.sql"
+      schema-locations: "classpath:schema-h2.sql"

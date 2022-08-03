@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.7.2</version>
+        <relativePath /> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>com.imooc</groupId>
+    <artifactId>oauth2</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>oauth2</name>
+    <description>慕课网 Spring Security 实战课 OAuth2 授权服务器，资源服务器和客户端</description>
+
+    <modules>
+        <module>uaa-common</module>
+        <module>uaa-ui</module>
+        <module>uaa</module>
+        <module>uaa-auth-server</module>
+        <module>todos-service</module>
+        <module>web-client</module>
+        <module>simple-server</module>
+    </modules>
+
+    <properties>
+        <java.version>11</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <passay.version>1.6.1</passay.version>
+        <frontend-maven-plugin.version>1.9.1</frontend-maven-plugin.version>
+        <problem.version>0.27.0</problem.version>
+        <jjwt.version>0.11.1</jjwt.version>
+        <otp.version>0.2.0</otp.version>
+        <redisson.version>3.17.4</redisson.version>
+        <embedded.redis.version>0.7.3</embedded.redis.version>
+        <aliyun.version>4.5.20</aliyun.version>
+        <leancloud.version>8.2.5</leancloud.version>
+        <sendgrid.version>4.0.1</sendgrid.version>
+        <greenmail.version>1.6.9</greenmail.version>
+        <querydsl.version>5.0.0</querydsl.version>
+        <springdoc.version>1.6.9</springdoc.version>
+        <nimbus.jose.jwt.version>8.17.1</nimbus.jose.jwt.version>
+        <security.jwt.version>1.1.1.RELEASE</security.jwt.version>
+        <bootstrap.version>5.1.3</bootstrap.version>
+        <okhttp.version>4.10.0</okhttp.version>
+        <gson.version>2.8.9</gson.version>
+        <spring.authorization.server.version>0.3.1</spring.authorization.server.version>
+    </properties>
+</project>

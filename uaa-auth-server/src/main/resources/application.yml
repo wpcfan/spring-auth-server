@@ -1,0 +1,15 @@
+server:
+  port: ${PORT:9000}
+
+spring:
+  profiles:
+    active: "dev"
+  messages:
+    always-use-message-format: false
+    basename: messages
+    encoding: UTF-8
+    fallback-to-system-locale: true
+    use-code-as-default-message: false
+  sql:
+    init:
+      mode: embedded

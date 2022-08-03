@@ -1,0 +1,97 @@
+server:
+  port: 8081
+  forward-headers-strategy: native
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web: DEBUG
+    org.springframework.security: DEBUG
+    org.springframework.security.oauth2: DEBUG
+
+spring:
+  thymeleaf:
+    cache: false
+  security:
+    oauth2:
+      client:
+        registration:
+          web-client-oidc:
+            provider: uaa
+            client-id: web-client
+            client-secret: secret
+            authorization-grant-type: authorization_code
+            redirect-uri: "http://127.0.0.1:8081/login/oauth2/code/{registrationId}"
+            scope: openid
+            client-name: web-client-oidc
+          web-client-authorization-code:
+            provider: uaa
+            client-id: web-client
+            client-secret: secret
+            authorization-grant-type: authorization_code
+            redirect-uri: "http://127.0.0.1:8081/authorized"
+            scope: todo.read,todo.write
+            client-name: web-client-authorization-code
+          web-client-client-credentials:
+            provider: uaa
+            client-id: web-client
+            client-secret: secret
+            authorization-grant-type: client_credentials
+            scope: todo.read,todo.write
+            client-name: web-client-client-credentials
+          weibo:
+            provider: weibo
+            client-id: ${WEIBO_CLIENT_ID}
+            client-secret: ${WEIBO_CLIENT_SECRET}
+            client-name: weibo
+            authorization-grant-type: authorization_code
+            scope: all
+            client-authentication-method: basic
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+          qq:
+            provider: qq
+            client-id: ${QQ_CLIENT_ID}
+            client-secret: ${QQ_CLIENT_SECRET}
+            client-name: qq
+            authorization-grant-type: authorization_code
+            scope: get_user_info
+            client-authentication-method: basic
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+          wechat:
+            provider: wechat
+            client-id: ${WECHAT_CLIENT_ID}
+            client-secret: ${WECHAT_CLIENT_SECRET}
+            client-name: wechat
+            authorization-grant-type: authorization_code
+            scope: snsapi_login
+            client-authentication-method: basic
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+          github:
+            client-id: ${GITHUB_CLIENT_ID}
+            client-secret: ${GITHUB_CLIENT_SECRET}
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+            scope: user,repo
+        provider:
+          uaa:
+            issuer-uri: http://localhost:9000
+          weibo:
+            authorization-uri: https://api.weibo.com/oauth2/authorize
+            token-uri: https://api.weibo.com/oauth2/access_token
+            user-info-uri: https://api.weibo.com/2/users/show.json
+            user-name-attribute: idstr
+          qq:
+            authorization-uri: https://graph.qq.com/oauth2.0/authorize
+            token-uri: https://graph.qq.com/oauth2.0/token
+            user-info-uri: https://graph.qq.com/oauth2.0/me
+            user-name-attribute: openid
+          wechat:
+            authorization-uri: https://open.weixin.qq.com/connect/qrconnect
+            token-uri: https://api.weixin.qq.com/sns/oauth2/access_token
+            user-info-uri: https://api.weixin.qq.com/sns/userinfo
+            user-name-attribute: openid
+  messages:
+    basename: messages
+
+
+todos:
+  base-uri: http://localhost:8082/todos
