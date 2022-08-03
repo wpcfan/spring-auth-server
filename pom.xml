@@ -17,12 +17,9 @@
 
     <modules>
         <module>uaa-common</module>
-        <module>uaa-ui</module>
-        <module>uaa</module>
         <module>uaa-auth-server</module>
         <module>todos-service</module>
         <module>web-client</module>
-        <module>simple-server</module>
     </modules>
 
     <properties>
