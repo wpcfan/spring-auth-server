@@ -19,10 +19,17 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.Module;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.imooc.uaa.domain.Client;
+import com.imooc.uaa.domain.Permission;
+import com.imooc.uaa.domain.User;
 import com.imooc.uaa.repository.ClientRepo;
 
 @Service
@@ -37,6 +44,8 @@ public class JpaRegisteredClientRepository implements RegisteredClientRepository
         List<Module> securityModules = SecurityJackson2Modules.getModules(classLoader);
         this.objectMapper.registerModules(securityModules);
         this.objectMapper.registerModule(new OAuth2AuthorizationServerJackson2Module());
+        this.objectMapper.addMixIn(User.class, UserMixin.class);
+        this.objectMapper.addMixIn(Permission.class, PermissionMixin.class);
     }
 
     @Transactional
@@ -184,5 +193,29 @@ public class JpaRegisteredClientRepository implements RegisteredClientRepository
             return ClientAuthenticationMethod.NONE;
         }
         return new ClientAuthenticationMethod(clientAuthenticationMethod); // Custom client authentication method
+    }
+
+    @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS)
+    @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY, getterVisibility = JsonAutoDetect.Visibility.NONE, isGetterVisibility = JsonAutoDetect.Visibility.NONE)
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    static class UserMixin {
+
+        @JsonCreator
+        public UserMixin(@JsonProperty("id") Long id, @JsonProperty("username") String username,
+                @JsonProperty("password") String password) {
+        }
+
+    }
+
+    @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS)
+    @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY, getterVisibility = JsonAutoDetect.Visibility.NONE, isGetterVisibility = JsonAutoDetect.Visibility.NONE)
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    static class PermissionMixin {
+
+        @JsonCreator
+        public PermissionMixin(@JsonProperty("id") Long id, @JsonProperty("authority") String authority,
+                @JsonProperty("displayName") String displayName) {
+        }
+
     }
 }

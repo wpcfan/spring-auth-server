@@ -1,0 +1,4 @@
+GET http://localhost:9000/oauth2/authorize?response_type=code&client_id=web-client&scope=todo.read%20todo.write&state=xyz&redirect_uri=http://127.0.0.1:8081/login/oauth2/code/web-client-oidc
+
+### Get the token
+POST http://localhost:9000/oauth2/token?grant_type=authorization_code&code=1BKX9dK1bcDkvGkW6DXNz8VtpH2WWbfu9ZoB2k1eOilkItLGQbeBssJhET9b5s3qAwHdL_Cc2YW_cAcyYmlnRIv-ctU-3m0s4whaHAJcnYheJf2w4e28ZHcWjQyQ-e8V&client_id=web-client&redirect_uri=http://127.0.0.1:8081/login/oauth2/code/web-client-oidc
